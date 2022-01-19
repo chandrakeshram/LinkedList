@@ -41,7 +41,7 @@ void displayLinkedList(Node *&head){
     }
     cout<<"NULL"<<endl;
 }
-Node* reverseLinkedList(Node* &head){
+Node* reverseLinkedList(Node* &head){   //Iterative Approach
     Node* prevNode,*currentNode,*nextNode;
     prevNode=NULL;
     currentNode=head;
@@ -56,6 +56,15 @@ Node* reverseLinkedList(Node* &head){
     }
     return prevNode;
 }
+Node* recursiveReverse(Node* &head){    //Recursive Approach
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+    Node* newhead=recursiveReverse(head->next);
+    head->next->next=head;
+    head->next=NULL;
+    return newhead;
+}
 int main()
 {
     Node *head =NULL;
@@ -66,7 +75,7 @@ int main()
     insertAtEnd(head,1);
     insertAtEnd(head,0);
     displayLinkedList(head);
-    Node*newhead=reverseLinkedList(head);
+    Node *newhead=recursiveReverse(head);
     displayLinkedList(newhead);
 
     
